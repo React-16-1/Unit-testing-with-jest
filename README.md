@@ -1,4 +1,4 @@
-# React Online Marathon (Sprint 17)
+# React Online Marathon (Sprint 16)
 Testing JS Applications (React Applications)
 
 # Application
