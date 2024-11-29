@@ -1,37 +1,31 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import getGitHubUser from "../../services/DataService";
 
-class Info extends Component {
+function Info({ user }) {
+  const [data, setData] = useState({});
 
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  async componentDidMount() {
-    getGitHubUser(this.props.user)
+  useEffect(() => {
+    getGitHubUser(user)
       .then((response) => {
-        this.setState(response.data);
+        setData(response.data);
       })
       .catch((error) => {
-        this.setState({ error: "request error" });
+        setData({ error: "request error" });
       });
-  }
+  }, [user]);
 
-  render() {
-    return (
-      <div>
-        <h3>GitHub User Info</h3>
-        <ul>
-          {Object.keys(this.state).map((i) => (
-            <li key={i}>
-              {i}: {this.state[i]}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h3>GitHub User Info</h3>
+      <ul>
+        {Object.keys(data).map((i) => (
+          <li key={i}>
+            {i}: {data[i]}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default Info;
